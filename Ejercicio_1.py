@@ -1,3 +1,6 @@
+from ast import Delete
+
+
 citizens = [{ 'First Name': 'Preston' , 'Last Name': 'Cunningham', 'Age': 49 , 'Education': 'Doctoral', 'Occupation':' Teacher' ,'Experience (Years)': 6, 'Salary': 62499}, 
  { 'First Name': 'Madaline', 'Last Name': 'Farrell', 'Age': 41, 'Education': 'Bachelor', 'Occupation': 'Insurer','Experience (Years)': 16, 'Salary': 50190},
  { 'First Name': 'Eleanor', 'Last Name': 'Carter', 'Age': 49, 'Education': 'Lower secondary', 'Occupation': 'Programmer','Experience (Years)': 18, 'Salary': 189716},
@@ -19,6 +22,63 @@ citizens = [{ 'First Name': 'Preston' , 'Last Name': 'Cunningham', 'Age': 49 , '
  { 'First Name': 'Sofia', 'Last Name': 'Hall', 'Age': 41, 'Education': 'Doctoral', 'Occupation': 'Baker','Experience (Years)': 1, 'Salary': 25904},
  { 'First Name': 'Ashton', 'Last Name': 'Kelly', 'Age': 49, 'Education': 'Master', 'Occupation': 'Chef','Experience (Years)': 6, 'Salary': 95533}
 ]
-#print(citizens[0].keys())
-variables = citizens[0].keys()
-print(variables)
+
+def get_variable (Lista,x):
+    variable =[]
+    for i in range (len(Lista) ):
+        variable.append(Lista[i][x])
+    return variable
+
+first_name = get_variable(citizens,'First Name')
+last_name = get_variable(citizens,'Last Name')
+age = get_variable(citizens,'Age')
+education = get_variable(citizens,'Education')
+occupation = get_variable(citizens,'Occupation')
+experience = get_variable(citizens,'Experience (Years)')
+salary = get_variable(citizens,'Salary')
+
+def get_average (Lista):
+    suma = 0
+    for i in range (len(Lista)):
+        suma += Lista[i]
+    mean =suma/len(Lista)
+    return round(mean,1)
+
+average_age = get_average(age)
+print("La media de edad es ",average_age)
+
+def unique (Lista):
+    levels = []
+    for i in range (len(Lista)):
+        if Lista[i] not in levels:
+            levels.append(Lista[i])
+    return levels
+
+educational_levels = unique(education)
+print("Los niveles educacionales que tenemos son: ", educational_levels)
+print ("Tenemos ",len(educational_levels)," niveles educacionales")
+
+ocupation_num = unique(occupation)
+print("Las ocupaciones que tenemos son: ", ocupation_num)
+print("Tenemos ",len(ocupation_num)," ocupaciones")
+
+def list_2 (Lista):
+    lista = []
+    for i in  range(len(Lista)):
+        nd={}
+        nd["First Name"] = Lista[i]["First Name"]
+        nd["Last Name"] =  Lista[i]["Last Name"]
+        nd["Age"] =  Lista[i]["Age"]
+        lista.append(nd)
+    return lista
+print("Lista con nombres, apellidos y edades: ", list_2(citizens))
+
+def salario_medio_ocupacion (Lista):
+    lista = []
+    for i in range(len(Lista)):
+        nd={}
+        nd["Occupation"] = Lista[i]["Occupation"]
+        nd["Salary"] = Lista[i]["Salary"]
+        lista.append(nd)
+    return lista
+print("Lista con ocupaciones y salarios: ", salario_medio_ocupacion(citizens))
