@@ -39,9 +39,13 @@ salary = get_variable(citizens,'Salary')
 
 def get_average (Lista):
     suma = 0
-    for i in range (len(Lista)):
-        suma += Lista[i]
-    mean =suma/len(Lista)
+    if len(Lista) == 0:
+        return 0
+    else:
+        for i in range (len(Lista)):
+            suma += Lista[i]
+        mean =suma/len(Lista)
+    
     return round(mean,1)
 
 average_age = get_average(age)
@@ -73,12 +77,39 @@ def list_2 (Lista):
     return lista
 print("Lista con nombres, apellidos y edades: ", list_2(citizens))
 
-def salario_medio_ocupacion (Lista):
+
+def mean_salary (a,x, Lista):
     lista = []
-    for i in range(len(Lista)):
-        nd={}
-        nd["Occupation"] = Lista[i]["Occupation"]
-        nd["Salary"] = Lista[i]["Salary"]
-        lista.append(nd)
+    for i in range (len(Lista)):
+        if Lista[i][a] == x:
+            lista.append(Lista[i]["Salary"])
+    return get_average(lista)
+
+
+
+diccionario = {}
+for i in range (len(educational_levels)):
+    diccionario[educational_levels[i]] = mean_salary("Education",educational_levels[i], citizens)
+print("Diccionario con los niveles educacionales y la media de salario: ",diccionario)
+
+diccionario_2 = {}
+for i in range (len(ocupation_num)):
+    diccionario_2[ocupation_num[i]] = mean_salary("Occupation",ocupation_num[i], citizens)
+print("Diccionario con las ocupaciones y la media de salario: ",diccionario_2)
+
+doctoral = filter((lambda x: x["Education"] == "Doctoral"), citizens)
+print (list(doctoral))
+
+def doctorados (Lista):
+    lista = []
+    for i in range (len(Lista)):
+        if Lista[i]["Education"] == "Doctoral":
+            lista.append(Lista[i])
     return lista
-print("Lista con ocupaciones y salarios: ", salario_medio_ocupacion(citizens))
+print("Lista con los doctorados: ",doctorados(citizens))
+
+
+nombre =list(map(lambda x: x["First Name"], citizens))
+Edad =list(map(lambda x: x["Age"], citizens))
+for i in range (len(nombre)):
+    print(nombre[i],"is",Edad[i], "years old")
